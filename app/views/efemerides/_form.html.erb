@@ -1,0 +1,37 @@
+<%= form_with(model: efemeride) do |form| %>
+  <% if efemeride.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(efemeride.errors.count, "error") %> prohibited this efemeride from being saved:</h2>
+
+      <ul>
+        <% efemeride.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label "Fecha", style: "display: block" %>
+    <%= form.datetime_field :date %>
+  </div>
+
+  <div>
+    <%= form.label "Categoria", style: "display: block" %>
+    <%= form.text_field :categories %>
+  </div>
+
+  <div>
+    <%= form.label "Comentario", style: "display: block" %>
+    <%= form.text_area :comments %>
+  </div>
+
+  <div>
+    <%= form.label "Imagen", style: "display: block" %>
+    <%= form.file_field :photo %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

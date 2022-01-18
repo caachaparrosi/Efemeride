@@ -1,0 +1,26 @@
+<%= form_for("filter_params", html: { method: "get" }) do | form | %>
+  <div class="row col-md-12">
+    <div class="pull-left col-md-2">
+      <h4><%= "Prueba" %></h4>
+    </div>
+    <div class="col-md-10 pull-right">
+      <div class="col-md-2 pull-right">
+        <%= form.submit "Filtrar" %>
+      </div>
+      <div class="col-md-4 pull-right">
+        <div class="col-md-6">
+          <%= form.text_field :date_from, data:
+          {:provide => "datepicker", 'date-format' => 'dd/mm/yyyy',
+          :language => "es"}, class: "form-control",
+          placeholder: "dd/mm/aaaa", autocomplete: 'off', value: @start_date  %>
+        </div>
+        <div class="col-md-6">
+          <%= form.text_field :date_to, data:
+          {:provide => "datepicker", 'date-format' => 'dd/mm/yyyy',
+          :language => "es"}, class: "form-control",
+          placeholder: "dd/mm/aaaa", autocomplete: 'off', value: @end_date  %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

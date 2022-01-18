@@ -1,0 +1,78 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="efemerides">
+<% content_for :title, 'Listado de efemerides' %>
+  <input type="text" id="rangepicker"  value="01/01/2018 - 01/15/2018" />
+  <br> 
+  <%= render "filter_params" %>
+  <form>
+    <div class="form-group form-inline col-md-3" style="margin-top: 20px">
+      <div class="input-group">
+        <% if params[:search].present? %>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input type="text" name="search" id="search" placeholder="Buscar por categoría" value="<%= params[:search] %>" class='form-control'>
+        </div>
+        <% else %>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          <input type="text" name="search" id="search" placeholder="Buscar por categoría" class='form-control'>
+        </div>
+        <% end %>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit"><span class="fa fa-search" aria-hidden="true">
+            </span> Buscar</button>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="panel panel-default">
+  <div class="row">
+    <div class="pull-right" style="margin-top: 20px; margin-right: 20px">
+      <%= button_to  "NUEVO EFEMERIDE", new_efemeride_path(), method: :get, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="display table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Categoria</th>
+            <th>Comentario</th>
+            <th>Imagen</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @efemerides.each do |efemeride|%>
+          <tr>
+            <td>
+              <%=efemeride.date.strftime("%d/%m/%Y %H:%M") + " hrs" %>
+            </td>
+            <td>
+              <%=efemeride.categories%>
+            </td>
+            <td>
+              <%=efemeride.comments%>
+            </td>
+            <td style="text-align: center">
+              <img src="<%= efemeride.photo%>" style="width:20%; height:20%;">
+            </td>
+            <td>
+              <%= link_to "Ver", efemeride %>
+            </td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#rangepicker").daterangepicker({}, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+</script>

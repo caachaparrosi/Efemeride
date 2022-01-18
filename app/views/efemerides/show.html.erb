@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @efemeride %>
+
+<div>
+  <%= button_to "Eliminar efemeride", @efemeride, method: :delete %>
+  <br>
+  <br>
+  <%= link_to "Editar efemeride", edit_efemeride_path(@efemeride) %> |
+  <%= link_to "Regresar", efemerides_path %>
+</div>
